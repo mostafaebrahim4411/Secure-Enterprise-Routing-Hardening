@@ -1,0 +1,31 @@
+I recently designed and implemented a secure, multi-branch network topology using EVE-NG, simulating a production-ready enterprise environment that balances robust routing with strict infrastructure security.
+
+Here is a breakdown of the network architecture and the security controls implemented:
+
+🌐 Routing & Core Infrastructure:
+
+Dual-LAN Architecture: Configured two separate LAN environments (192.168.1.0/24 and 192.168.3.0/24) where each local router acts as the Default Gateway and dynamically allocates IP addresses via DHCP.
+
+Dynamic Routing (OSPFv2): Implemented OSPF across all 3 routers to ensure full network convergence and seamless end-to-end connectivity between all end devices.
+
+Edge Internet Gateway: The core router (R5) acts as the centralized edge gateway, providing secure internet access to both internal segments.
+
+🛡️ Infrastructure Hardening & Device Security:
+
+Control Plane Protection (OSPF MD5 Authentication): Secured the OSPF routing domain by enabling Message-Digest (MD5) authentication on all interfaces to prevent unauthorized routing updates or injection attacks.
+
+Secure Management (SSH over Telnet): Disabled unencrypted Telnet and enforced SSHv2 globally across all devices to protect management traffic from sniffing.
+
+Strict Password Policies: Enforced a global password compliance policy (security passwords min-length 10) to mitigate brute-force attacks, combined with the modern, high-security scrypt hashing algorithm for local user secrets.
+
+Console & VTY Line Protection: Secured both physical Console access and virtual VTY lines using local authentication with logging synchronous enabled for streamlined administration.
+
+👥 Role-Based Access Control (RBAC):
+
+Leveraged Cisco Parser Views to enforce the principle of least privilege.
+
+Created an Admin View with full privilege capabilities and a restricted Student View limited strictly to non-disruptive show commands to prevent unauthorized configuration changes.
+
+Check out the screenshots below showing the verified internet connectivity, OSPF security configs, and RBAC implementation! 👇
+
+#Networking #Cybersecurity #NetworkSecurity #Cisco #OSPF #EVE_NG #RoutingAndSwitching #InfrastructureHardening

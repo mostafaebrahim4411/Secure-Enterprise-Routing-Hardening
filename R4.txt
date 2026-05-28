@@ -1,0 +1,146 @@
+R4#show runn
+R4#show running-config
+Building configuration...
+
+
+Current configuration : 1550 bytes
+!
+! Last configuration change at 00:39:12 UTC Thu May 28 2026 by admin
+!
+version 15.7
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname R4
+!
+boot-start-marker
+boot-end-marker
+!
+!
+security passwords min-length 10
+enable secret 9 $9$2eXYzsMOw64FrD$1dF8QjpdHJkt6c0fNHkDQBhF6hwPQMOR.NrzsbVGbHQ
+!
+no aaa new-model
+!
+!
+!
+mmi polling-interval 60
+no mmi auto-configure
+no mmi pvc
+mmi snmp-timeout 180
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+
+
+!
+!
+ip dhcp pool 1
+ network 192.168.3.0 255.255.255.0
+ dns-server 8.8.8.8
+ default-router 192.168.3.1
+!
+!
+!
+ip domain name mylab.lab
+ip cef
+no ipv6 cef
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+!
+!
+!
+!
+!
+username admin secret 9 $9$WGL.p/DGpvFnFD$ehXKe//uhZOJAL.absY5sYCHlx8ykiU66Ngw03VKUWs
+!
+redundancy
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Ethernet0/0
+ ip address 10.2.2.1 255.255.255.252
+ ip ospf authentication message-digest
+ ip ospf message-digest-key 1 md5 cisco
+ duplex auto
+!
+interface Ethernet0/1
+ ip address 192.168.3.1 255.255.255.0
+ duplex auto
+!
+interface Ethernet0/2
+ no ip address
+ shutdown
+ duplex auto
+!
+interface Ethernet0/3
+ no ip address
+ shutdown
+ duplex auto
+!
+router ospf 1
+ network 10.2.2.0 0.0.0.3 area 0
+ network 192.168.3.0 0.0.0.255 area 0
+!
+ip forward-protocol nd
+!
+!
+no ip http server
+no ip http secure-server
+ip ssh version 2
+!
+ipv6 ioam timestamp
+!
+!
+!
+control-plane
+!
+!
+!
+!
+!
+!
+!
+!
+line con 0
+ logging synchronous
+ login local
+line aux 0
+line vty 0 4
+ logging synchronous
+ login local
+ transport input ssh
+!
+!
+end
+
+R4#
